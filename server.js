@@ -1,29 +1,7 @@
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { users } from "./fakedb.js";
-
-const typeDefs = gql`
-  type Query {
-    users: [User]
-  }
-  type User {
-    id: ID
-    name: String
-    username: String
-    email: String
-    phone: String
-    address: [Address]
-  }
-  type Address {
-    street: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    users: () => users,
-  },
-};
+import resolvers from "./resolvers.js";
+import typeDefs from "./schemaGQL.js";
 
 const server = new ApolloServer({
   typeDefs,

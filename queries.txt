@@ -1,4 +1,55 @@
-query getIdNameOfUsers{users{
-  id
-  name
-}}
+query getUserDetails{
+  users{
+    id
+    firstName
+    lastName
+    email
+    password
+  }
+}
+
+query getAllQuotes{
+  quotes{
+    name
+  by
+  }
+}
+
+query getQuoteById{
+  user(id:"1"){
+    firstName
+    lastName
+    email
+  }
+}
+
+query getQuoteByUser{
+  quoteByUser(by:"1"){
+    name
+  }
+}
+
+mutation{
+  signUpUser(firstName: "Saurabh", lastName: "Gulab", email:"saurabhgulab@gmail.com", password: "54321"){
+    id
+    firstName
+    lastName
+    email
+    password
+  }
+}
+
+mutation createNewUser($userNew:userInput!){
+  user:signUpUser(userNew: $userNew){
+    id
+    firstName
+    lastName
+    email
+  }
+}
+add this to query variable=>
+{
+  "userNew":{
+    "firstName": "Saurabh", "lastName": "Gulab", "email":"saurabhgulab@gmail.com", "password": "54321"
+  }
+}
