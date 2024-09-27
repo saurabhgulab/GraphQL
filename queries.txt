@@ -1,0 +1,4 @@
+query getIdNameOfUsers{users{
+  id
+  name
+}}
