@@ -1,6 +1,6 @@
 query getUserDetails{
   users{
-    id
+    _id
     firstName
     lastName
     email
@@ -16,7 +16,7 @@ query getAllQuotes{
 }
 
 query getQuoteById{
-  user(id:"1"){
+  user(_id:"1"){
     firstName
     lastName
     email
@@ -31,17 +31,17 @@ query getQuoteByUser{
 
 mutation{
   signUpUser(firstName: "Saurabh", lastName: "Gulab", email:"saurabhgulab@gmail.com", password: "54321"){
-    id
+    _id
     firstName
     lastName
     email
     password
   }
 }
-
+used to create new user=>
 mutation createNewUser($userNew:userInput!){
   user:signUpUser(userNew: $userNew){
-    id
+    _id
     firstName
     lastName
     email
@@ -51,5 +51,18 @@ add this to query variable=>
 {
   "userNew":{
     "firstName": "Saurabh", "lastName": "Gulab", "email":"saurabhgulab@gmail.com", "password": "54321"
+  }
+}
+
+mutation SigninUser($userSignin:UserSigninInput!){
+  user:signinUser(userSignin:$userSignin){ 
+    token
+  }
+}
+
+{
+  "userSignin": {
+    "email": "navin@navin.com",
+    "password": "12345"
   }
 }
