@@ -1,11 +1,29 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_QUOTE } from "../gqlOperations/mutations";
 
 const CreateQuote = () => {
   const [quote, setQuote] = useState("");
+  const [createQuote, { loading, error, data }] = useMutation(CREATE_QUOTE);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(quote);
+    // console.log(quote);
+    createQuote({
+      variables: { name: quote },
+    });
   };
+  if (loading)
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    );
+  if (error) {
+    console.log(error.message);
+  }
+  if (data) {
+    console.log(data);
+  }
   return (
     <div className="container my-container">
       <form onSubmit={handleSubmit}>
