@@ -11,7 +11,10 @@ query getUserDetails{
 query getAllQuotes{
   quotes{
     name
-  by
+  by{
+    _id
+    firstName
+  }
   }
 }
 
