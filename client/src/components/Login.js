@@ -1,9 +1,25 @@
+import { useMutation } from "@apollo/client";
+import { Alert, AlertTitle } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { LOGIN_USER } from "../gqlOperations/mutations";
 
 const Login = () => {
   const [formData, setFormData] = useState("");
   const navigate = useNavigate();
+  const [loginUser, { loading, error, data }] = useMutation(LOGIN_USER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.user.token);
+      navigate("/");
+    },
+  });
+
+  if (loading)
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    );
 
   const handleChange = (e) => {
     setFormData({
@@ -13,11 +29,19 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate("/");
+    loginUser({
+      variables: { userSignin: formData },
+    });
   };
   return (
     <div className="container my-container">
+      {error && (
+        <div className="container">
+          <Alert severity="error">
+            <AlertTitle>Email already exists.</AlertTitle>
+          </Alert>
+        </div>
+      )}
       <h5 className="header_1">Login Form</h5>
       <form className="form_1" onSubmit={(e) => handleSubmit(e)}>
         <input
