@@ -4,10 +4,18 @@ import { GET_ALL_QUOTES } from "../gqlOperations/queries";
 
 const Home = () => {
   const { loading, error, data } = useQuery(GET_ALL_QUOTES);
-  if (loading) return;
-  <h1>loading</h1>;
+  if (loading)
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    );
+
   if (error) {
     console.log(error.message);
+  }
+  if (data.quotes.length === 0) {
+    return <h2>No quotes found</h2>;
   }
   return (
     <div className="container my-container">
