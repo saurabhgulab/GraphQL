@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -12,6 +14,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    navigate("/");
   };
   return (
     <div className="container my-container">
@@ -31,11 +34,13 @@ const Login = () => {
           name="password"
           onChange={handleChange}
         />
-
         <button className="btn submit_button_1" type="submit" name="action">
           Submit
           <i className="material-icons right">arrow_forward</i>
         </button>
+        <Link to="/signup">
+          <p>Don't have an account?</p>
+        </Link>
       </form>
     </div>
   );

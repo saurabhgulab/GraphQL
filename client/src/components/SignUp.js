@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [formData, setFormData] = useState("");
@@ -51,6 +52,9 @@ const SignUp = () => {
           Submit
           <i className="material-icons right">arrow_forward</i>
         </button>
+        <Link to="/login">
+          <p>Already have an account?</p>
+        </Link>
       </form>
     </div>
   );

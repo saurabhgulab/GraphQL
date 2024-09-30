@@ -1,18 +1,14 @@
 import "./App.css";
-// import CreateQuote from "./components/CreateQuote";
-// import Home from "./components/Home";
-// import Profile from "./components/Profile";
-// import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Navbar from "./components/Navbar";
+import routes from "../src/routes.js";
+import { useRoutes } from "react-router-dom";
 
 function App() {
+  const element = useRoutes(routes);
   return (
     <div className="App">
-      {/* <Login /> */}
-      <SignUp />
-      {/* <Profile /> */}
-      {/* <CreateQuote /> */}
-      {/* <Home /> */}
+      <Navbar />
+      {element}
     </div>
   );
 }
