@@ -1,5 +1,4 @@
 import { quotes, users } from "./fakedb2.js";
-// import { randomBytes } from "crypto";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -13,10 +12,14 @@ const resolvers = {
     user: async (_, { _id }) => await User.findOne({ _id }),
     quotes: async () => await Quote.find({}).populate("by", "_id firstName"),
     quoteByUser: async (_, { by }) => await Quote.find({ by }),
+    myprofile: async (_, args, { userId }) => {
+      if (!userId) throw new Error("You must be logged in");
+      return await User.findOne({ _id: userId });
+    },
   },
   User: { quotes: async (value) => await Quote.find({ by: value._id }) },
   Mutation: {
-    /*To signup New User */
+    // To signup New User
     signUpUser: async (_, { userNew }) => {
       const user = await User.findOne({ email: userNew.email });
       if (user) {
@@ -30,6 +33,7 @@ const resolvers = {
       console.log(`new user ${userNew.firstName} created successfully`);
       return await newUser.save();
     },
+    //To login User
     signinUser: async (_, { userSignin }) => {
       const user = await User.findOne({ email: userSignin.email });
       if (!user) {
@@ -42,6 +46,7 @@ const resolvers = {
       const token = jwt.sign({ userId: user._id }, JWT_SECRET);
       return { token };
     },
+    //To create new Quote
     createQuote: async (_, { name }, { userId }) => {
       if (!userId) {
         throw new Error("You must be logged in");

@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to="/" className="brand-logo left">
           App
         </Link>
-        <ul id="nav-mobile" className="right">
+        <ul id="nav-mobile" className="right ">
           {token ? (
             <>
               <li>
