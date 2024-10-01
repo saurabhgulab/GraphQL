@@ -9,7 +9,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-wrapper">
         <Link to="/" className="brand-logo left">
-          App
+          Share Something
         </Link>
         <ul id="nav-mobile" className="right ">
           {token ? (

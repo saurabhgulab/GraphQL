@@ -53,3 +53,8 @@
   margin-left: 10px;
   padding: 10px;
 }
+.giphy {
+  width: 100%;
+  margin-top: 24px;
+  position: relative;
+}

@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import OtherUserProfile from "./components/OtherUserProfile";
+import NotFound from "./components/NotFound";
 
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
   {
     path: "/profile/:userid",
     element: <OtherUserProfile />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];
 

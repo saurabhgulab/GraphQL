@@ -4,12 +4,13 @@ import Stack from "@mui/material/Stack";
 import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
-import { GET_MY_PROFILE } from "../gqlOperations/queries";
+import { GET_USER_BY_ID } from "../gqlOperations/queries";
 
 export default function OtherUserProfile() {
   const { userid } = useParams();
-  console.log(userid);
-  const { loading, error, data } = useQuery(GET_MY_PROFILE);
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    variables: { userid },
+  });
 
   if (loading) return <h2>Profile is loading</h2>;
   if (error) {

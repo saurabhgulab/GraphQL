@@ -1,11 +1,12 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import { SIGNUP_USER } from "../gqlOperations/mutations";
 
 const SignUp = () => {
+  const navigate = useNavigate("");
   const [formData, setFormData] = useState("");
   const [signupUser, { loading, error, data }] = useMutation(SIGNUP_USER);
   if (loading)
@@ -33,6 +34,7 @@ const SignUp = () => {
         userNew: formData,
       },
     });
+    navigate("/login");
   };
   return (
     <div className="container my-container">
