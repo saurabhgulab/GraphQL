@@ -6,9 +6,9 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   return (
-    <nav>
+    <nav className="navbar bg-body-tertiary">
       <div className="nav-wrapper">
-        <Link to="/" className="brand-logo left">
+        <Link to="/" className="app-name">
           Share Something
         </Link>
         <ul id="nav-mobile" className="right ">
